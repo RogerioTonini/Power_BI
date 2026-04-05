@@ -1,0 +1,66 @@
+{
+    "recommendations": [
+
+        // Bash / PowerShell
+        "mads-hartmann.bash-ide-vscode",    // IntelliSense para Bash
+        "timonwong.shellcheck",             // Linter para Bash
+        "foxundermoon.shell-format",        // Formatador Bash
+        "ms-vscode.powershell",             // Não necessário para projeto Bash/Python
+        "remisa.shellman",                  // Snippets Bash
+
+        "janisdd.vscode-edit-csv",      // Editor de CSV
+        "editorconfig.editorconfig",
+
+        // Documentação
+        "christian-kohler.path-intellisense",   // Autocomplete de paths
+        "davidanson.vscode-markdownlint",       // Linter Markdown
+        "esbenp.prettier-vscode",               // Formatador universal (JSON, YAML, MD)
+        "shd101wyy.markdown-preview-enhanced",  // Preview avançado Markdown
+        "tomoki1207.pdf",                       // Visualizar arquivos PDF
+
+        // FABRIC
+        "gerhardbrueckl.fabric",
+
+        // => GIT E CONTROLE DE VERSÃO
+        "bierner.markdown-preview-github-styling",  // MARKDOWN - Preview GitHub Style
+        "donjayamanne.githi",                       // GIT - History
+        "fabiospampinato.vscode-open-in-github",    // GIT - Navegação GitHub
+        "felipecaputo.git-project-manager",         // GIT - Gerenciamento de Projetos
+        "github.vscode-pull-request-github",        // GITHUB - Pull Requests
+        "ms-vscode.vscode-github-issue-notebooks",  // GITHUB - Issue Notebooks
+        "mhutchie.git-graph",                       // Visualização de grafos Git
+
+         // Power BI
+        "gerhardbrueckl.powerbi-vscode",                // Power BI Studio
+        "gerhardbrueckl.powerbi-vscode-extensionpack",  // Power BI VSCode Extension Pack
+        "powerquery.vscode-powerquery",                 // Power Query / M Language
+
+        // => UTILIDADES
+        "0xtanzim.filetree-pro",            // FileTree Pro
+        "aaron-bond.better-comments",       // Comentários coloridos
+        "naumovs.color-highlight",          // Color Highlight
+        "oderwat.indent-rainbow",           // Colorização de indentação
+        "vscode-icons-team.vscode-icons",   // Ícones de arquivos
+        "wayou.vscode-todo-highlight",      // Destaca TODOs
+
+
+        // => DADOS E NOTEBOOKS
+        // "ms-toolsai.jupyter", // Jupyter Notebooks
+        // "ms-toolsai.jupyter-keymap", // Atalhos Jupyter
+        // "ms-toolsai.jupyter-renderers", // Visualizações ricas
+        // "mechatroner.rainbow-csv", // Colorização de CSV
+        // "charliermarsh.ruff", // Linter super rápido (substitui flake8, pylint)
+        // "streetsidesoftware.code-spell-checker", // Verificação ortográfica
+        // "streetsidesoftware.code-spell-checker-portuguese-brazilian", // Dicionário PT-BR
+
+        // => DOCUMENTAÇÃO
+        // "yzhang.markdown-all-in-one", // Edição completa Markdown
+        // "njpwerner.autodocstring", // Geração automática de docstrings
+        // "pkief.material-icon-theme", // Tema alternativo de ícones
+    ],
+    // ==> EXTENSÕES NÃO RECOMENDADAS (podem causar conflito) <==
+    "unwantedRecommendations": [
+        "ms-python.pylint", // Use ruff ao invés
+        "ms-python.flake8", // Use ruff ao invés
+    ]
+}
