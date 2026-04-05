@@ -20,15 +20,6 @@ configurar tratamento de arquivos binários,
 - Adicionar scripts de hooks para Conventional Commits"
 ```
 
-### Commit: Versão do Python e Dependências do Projeto
-
-```bash
-git add .python-version pyproject.toml poetry.lock
-git commit -m "build:
-- Configuração da versão do Python utilizada no projeto,
-- Configuração do Poetry e bibliotecas (dependências) do projeto"
-```
-
 ### Commit: Configurações do VSCode
 
 ```bash
@@ -39,20 +30,34 @@ git commit -m "chore(vscode): adicionar configurações do editor"
 ### Commit: README.md
 
 ```bash
-git add README.md docs/.
+git add README.md
 git commit -m "docs: adicionar documentação do projeto"
 ```
 
-### Commit: app / noteboos / sql
+### Commit: 0_Templates/
 
 ```bash
-git add app/. notebooks/. sql/.
-git commit -m "feat(app): criar estrutura base da aplicação (notebooks, sql)"
+git add 0_Templates/
+git commit -m "feat: Inclusão dos arquivos: Template_Default.pbit e .pbix"
 ```
 
-### Commit: Testes - Se for criado
+### Commit: 1_Linguagem_M/
 
 ```bash
-git add tests/
-git commit -m "test: adicionar estrutura de testes"
+git add 1_Linguagem_M/
+git commit -m "feat(Linguagem_M): criar estrutura base da aplicação"
+```
+
+### Commit: 2_DAX/
+
+```bash
+git add 2_DAX/
+git commit -m "feat(DAX): criar estrutura base da aplicação"
+```
+
+### Commit: 3_TMDL/
+
+```bash
+git add 3_TMDL/
+git commit -m "feat(TMDL): Inclusão dos arquivos _Medidas.tmdl e dimCalendario.tmdl"
 ```
