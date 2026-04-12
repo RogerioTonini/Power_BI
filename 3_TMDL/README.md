@@ -3,8 +3,8 @@
 | Arquivo | Objetivo | URL |
 | --- | --- | --- |
 | _Medidas.tmdl | Cria tabela de medidas | <https://github.com/RogerioTonini/Power_BI/blob/main/3_TMDL/_Medidas.tdml> |
-| dimCalendario.tmdl | Tabela dimensão Calendário | <https://github.com/RogerioTonini/Power_BI/blob/main/3_TMDL/dimCalendario.tmdl> |
-| dimHoras.tmdl | Tabela dimensão Horas do dia | <https://github.com/RogerioTonini/Power_BI/blob/main/3_TMDL/dimHoras.tmdl> |
+| dimCalendario.tmdl | Tabela Calendário | <https://github.com/RogerioTonini/Power_BI/blob/main/3_TMDL/dimCalendario.tmdl> |
+| dimHoras.tmdl | Tabela Horas do dia | <https://github.com/RogerioTonini/Power_BI/blob/main/3_TMDL/dimHoras.tmdl> |
 
 ## Dicas
 
