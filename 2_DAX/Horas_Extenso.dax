@@ -1,0 +1,37 @@
+Horas_Extenso =
+	VAR vQtdSegundos = [Duracao Segundos]
+	VAR vQtdDias     = TRUNC( DIVIDE( vQtdSegundos, 86400 ) )
+	VAR vRestoDias   = MOD( vQtdSegundos, 86400 )
+
+	VAR vQtdHoras    = TRUNC( DIVIDE( vRestoDias, 3600 ) )
+	VAR vRestoHoras  = MOD( vRestoDias, 3600 )
+
+	VAR vQtdMinutos  = TRUNC( DIVIDE( vRestoHoras, 60 ) )
+	VAR vQtdSegundos = MOD( vRestoHoras, 3600 )
+
+	VAR vSufixoDia     = IF( vQdtDias = 1, " dia ", " dias " )
+	VAR vSufixoHora    = IF( vQdtHoras = 1, " hora ", " horas " )
+	VAR vSufixoMinuto  = IF( vQdtMinutos = 1, " minuto ", " minutos " )
+	VAR vSufixoSegundo = IF( vQdtSegundos = 1, " segundo ", " segundos " )
+
+	VAR vResultado =
+		IF(
+			vQtdDias > 0,
+			FORMAT( vQtdDias, "0") & vSufixoDia,
+			BLANK()
+		) &
+		IF(
+			vQtdDias > 0 || vQtdHoras > 0,
+			FORMAT( vQtdHoras, "0") & vSufixoHora,
+			BLANK()
+		) &
+		IF( vQtdDias > 0 || vQtdHoras > 0 || vQtdMinutos > 0,
+			FORMAT( vQtdMinutos, "0") & vSufixoMinuto,
+			BLANK()
+		) &
+		IF(
+			vQtdDias > 0 || vQtdHoras > 0 || vQtdSegMinutos > 0 || vQtdSegundos > 0,
+			FORMAT( vQtdSeghndos, "0") & vSufixoSegundo, BLANK()
+		)
+
+		RETURN vResultado
