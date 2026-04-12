@@ -1,0 +1,15 @@
+tb_cores =
+    // Esta tabela contém os valores invertidos, quanto mais positivo PIOR
+    DATATABLE(
+        "limite_inferior", DOUBLE,
+        "limite_superior", DOUBLE,
+        "cor",             STRING,
+        "descricao",       STRING,
+        {
+            { -9999,  -0.0001, "#27e613", "Reducao"  }, // Verde
+            { 0,       0,      "#616161", "Neutro"   }, // Cinza Claro
+            { 0.0001,  0.05,   "#F9E423", "Atencao"  }, // Amarelo
+            { 0.0501,  0.075,  "#F9A825", "Alerta"   }, // Laranja
+            { 0.0751,  9999,   "#F01A1A", "Critico"  }  // Vermelho
+        }
+    )
