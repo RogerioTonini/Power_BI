@@ -3,7 +3,7 @@
 | Arquivo | Objetivo | URL |
 | --- | --- | --- |
 | Horas_Extenso.dax | Formata horas em extenso | <https://github.com/RogerioTonini/Power_BI/blob/main/2_DAX/Horas_Extenso.dax> |
-| tb_cores.dax | Tabela de cores | <https://github.com/RogerioTonini/Power_BI/blob/main/2_DAX/tb_cores.dax> |
+| tb_cores.dax | Tabela de cores | <https://github.com/RogerioTonini/Power_BI/blob/main/2_DAX/tb_Cores.dax> |
 | tb_UX_Format.dax | Tabela de formatação de UX | <https://github.com/RogerioTonini/Power_BI/blob/main/2_DAX/tb_UX_Format.dax> |
 
 ## Horas_Extenso.dax - Créditos

@@ -2,7 +2,7 @@
 
 | Arquivo | Objetivo | URL |
 | --- | --- | --- |
-| Calculo_Horas.tmdl | Relat. de eventos com cálculo de horas | <https://github.com/RogerioTonini/Power_BI/blob/main/4_Modelos_Semanticos/Calculo_Horas.tmdl> |
+| Calculo_Horas.tmdl | Relat. de eventos com cálculo de horas | <https://github.com/RogerioTonini/Power_BI/blob/main/4_Modelos_Semanticos/Calculo_Horas.tdml> |
 
 ## Dicas
 

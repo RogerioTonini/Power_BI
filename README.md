@@ -29,6 +29,10 @@ Biblioteca de scripts da Linguagem M, DAX e scripts TMDL para Power BI.
 
 <https://github.com/RogerioTonini/Power_BI/tree/main/3_TMDL>
 
+## Repositório para Modelos Semânticos
+
+<https://github.com/RogerioTonini/Power_BI/tree/main/4_Modelos_Semanticos>
+
 ### Commit: Estrutura inicial - Git
 
 ```bash
