@@ -1,0 +1,539 @@
+createOrReplace
+
+	model Model
+		culture: pt-BR
+		defaultPowerBIDataSourceVersion: powerBI_V3
+		sourceQueryCulture: pt-BR
+		dataAccessOptions
+			legacyRedirects
+			returnErrorValuesAsNull
+
+		table fatoEventos
+
+			column ID_Evento
+				dataType: int64
+				formatString: 0
+				summarizeBy: sum
+				sourceColumn: ID_Evento
+
+				annotation SummarizationSetBy = Automatic
+
+			column Evento
+				dataType: string
+				summarizeBy: none
+				sourceColumn: Evento
+
+				annotation SummarizationSetBy = Automatic
+
+			column DataInicio
+				dataType: dateTime
+				isHidden
+				formatString: Short Date
+				summarizeBy: none
+				sourceColumn: DataInicio
+
+				changedProperty = IsHidden
+
+				annotation SummarizationSetBy = Automatic
+
+				annotation UnderlyingDateTimeDataType = Date
+
+			column HoraInicio
+				dataType: dateTime
+				formatString: Long Time
+				summarizeBy: none
+				sourceColumn: HoraInicio
+
+				annotation SummarizationSetBy = Automatic
+
+				annotation UnderlyingDateTimeDataType = Time
+
+			column DataFinal
+				dataType: dateTime
+				isHidden
+				formatString: Short Date
+				summarizeBy: none
+				sourceColumn: DataFinal
+
+				variation Variation
+					isDefault
+					relationship: 83962451-2347-429b-8244-eeebf9b70d73
+					defaultHierarchy: LocalDateTable_5d209140-c88f-4f28-a07d-cb296a9b6641.'Hierarquia de datas'
+
+				changedProperty = IsHidden
+
+				annotation SummarizationSetBy = Automatic
+
+				annotation UnderlyingDateTimeDataType = Date
+
+			column HoraFinal
+				dataType: dateTime
+				formatString: Long Time
+				summarizeBy: none
+				sourceColumn: HoraFinal
+
+				annotation SummarizationSetBy = Automatic
+
+				annotation UnderlyingDateTimeDataType = Time
+
+			column QtdeSegundos
+				dataType: int64
+				formatString: 0
+				summarizeBy: none
+				sourceColumn: QtdeSegundos
+
+				annotation SummarizationSetBy = User
+
+			partition fatoEventos = m
+				mode: import
+				queryGroup: Fato
+				source = ```
+						let
+						    Fonte =
+						        Csv.Document(
+						            File.Contents(_Caminho_Arquivo),
+						            [Delimiter = ";", Columns = 4, Encoding = 65001, QuoteStyle = QuoteStyle.None]
+						        ),
+
+						    Cabec_Promovido =
+						        Table.PromoteHeaders(Fonte, [PromoteAllScalars = true]),
+
+						    TipagemDados =
+						        Table.TransformColumnTypes(
+						            Cabec_Promovido,
+						            {
+						                {"ID_Evento", Int64.Type},
+						                {"DataHoraInicio", type datetime},
+						                {"DataHoraFim", type datetime}
+						            }
+						    ),
+
+						    add_QtdSegundos =
+						        Table.AddColumn(
+						            TipagemDados,
+						            "QtdeSegundos",
+						            each Duration.TotalSeconds([DataHoraFim] - [DataHoraInicio]),
+						            Int64.Type
+						        ),
+
+						    add_DataHoraSeparadas =
+						        Table.AddColumn(
+						            add_QtdSegundos,
+						            "DataHoraSeparadas",
+						            each [
+						            DataInicio = Date.From([DataHoraInicio]),
+						            HoraInicio = Time.From([DataHoraInicio]),
+						            DataFinal  = Date.From([DataHoraFim]),
+						            HoraFinal  = Time.From([DataHoraFim])
+						            ],
+						            type [
+						                DataInicio = date,
+						                HoraInicio = time,
+						                DataFinal = date,
+						                HoraFinal = time
+						            ]
+						        ),
+
+						    ExpandeColunas =
+						        Table.ExpandRecordColumn(
+						            add_DataHoraSeparadas,
+						            "DataHoraSeparadas",
+						            {"DataInicio", "HoraInicio", "DataFinal", "HoraFinal"},
+						            {"DataInicio", "HoraInicio", "DataFinal", "HoraFinal"}
+						        ),
+						    _DadosNormalizados_ =
+						        Table.SelectColumns(
+						            ExpandeColunas,
+						            {
+						                "ID_Evento",
+						                "Evento",
+						                "DataInicio",
+						                "HoraInicio",
+						                "DataFinal",
+						                "HoraFinal",
+						                "QtdeSegundos"
+						            }
+						        )
+						in
+						    _DadosNormalizados_
+						```
+
+			annotation PBI_NavigationStepName = Navegação
+
+			annotation PBI_ResultType = Table
+
+		table dimCalendario
+			dataCategory: Time
+
+			column Data
+				dataType: dateTime
+				isKey
+				formatString: Short Date
+				summarizeBy: none
+				sourceColumn: Data
+
+				annotation SummarizationSetBy = Automatic
+
+				annotation UnderlyingDateTimeDataType = Date
+
+			column Ano
+				dataType: int64
+				formatString: 0
+				summarizeBy: none
+				sourceColumn: Ano
+
+				annotation SummarizationSetBy = Automatic
+
+			column MesNum
+				dataType: int64
+				formatString: 0
+				summarizeBy: none
+				sourceColumn: MesNum
+
+				annotation SummarizationSetBy = Automatic
+
+			column MesNome
+				dataType: string
+				summarizeBy: none
+				sourceColumn: MesNome
+				sortByColumn: MesNum
+
+				changedProperty = SortByColumn
+
+				annotation SummarizationSetBy = Automatic
+
+			column MesAbrev
+				dataType: string
+				summarizeBy: none
+				sourceColumn: MesAbrev
+
+				annotation SummarizationSetBy = Automatic
+
+			partition dimCalendario = m
+				mode: import
+				queryGroup: Dimensão
+				source =
+						let
+						    MenorData = #date(_AnoInicio,01,01),
+						    MaiorData = Date.From(Date.EndOfYear(DateTime.LocalNow())),
+						    DataInicio = Date.StartOfYear(MenorData),
+						    DataFim = Date.EndOfYear(MaiorData),
+						    Dias = Duration.Days(DataFim- DataInicio) + 1,
+						    ListarDatas = List.Dates(DataInicio, Dias, #duration(1,0,0,0)),
+						    Tabela = #table(
+						        type table[
+						            Data     = date,
+						            Ano      = Int64.Type,
+						            MesNum   = Int64.Type,
+						            MesNome  = text,
+						            MesAbrev = text
+						        ],
+						        List.Transform(
+						            ListarDatas,
+						            each {
+						                _,
+						                Date.Year(_),
+						                Date.Month(_),
+						                Text.Proper( Date.MonthName(_)),
+						                Text.Proper(Text.Start(Date.MonthName(_), 3))
+						            }
+						        )
+						    )
+						in
+						    Tabela
+
+			annotation PBI_NavigationStepName = Navegação
+
+			annotation PBI_ResultType = Table
+
+		table _Medidas
+
+			measure Duracao_Total = ```
+
+					VAR vTempoSegundos = [Duracao_Media]   // Coluna da tabela
+					VAR vQtdHoras      = TRUNC( DIVIDE( vTempoSegundos, 3600, 0 ) )
+					VAR vRestoHoras    = MOD( vTempoSegundos, 3600 )
+					VAR vQtdMinutos    = TRUNC( DIVIDE( vRestoHoras, 60, 0 ) )
+					VAR vQtdSegundos   = MOD( vRestoHoras, 60 )
+
+					VAR vResultado =
+					    IF(
+					        vTempoSegundos,
+					        FORMAT( vQtdHoras, "00" ) & ":" &
+					        FORMAT( vQtdMinutos, "00" ) & ":" &
+					        FORMAT( vQtdSegundos, "00" )
+					    )
+
+					RETURN vResultado
+					```
+
+			measure Duracao_Media = sum(fatoEventos[QtdeSegundos])
+				formatString: #,0
+
+			column Value
+				isHidden
+				formatString: 0
+				summarizeBy: sum
+				isNameInferred
+				sourceColumn: [Value]
+
+				annotation SummarizationSetBy = Automatic
+
+			partition _Medidas = calculated
+				mode: import
+				source = {0}
+
+			annotation PBI_Id = fc1af25cc8e34b2eb843bb6f4141646d
+
+		table DateTableTemplate_213fe0a7-1d77-4e17-a663-5a524a2ac564
+			isHidden
+			isPrivate
+
+			column Date
+				dataType: dateTime
+				isHidden
+				formatString: General Date
+				dataCategory: PaddedDateTableDates
+				summarizeBy: none
+				isNameInferred
+				sourceColumn: [Date]
+
+				annotation SummarizationSetBy = User
+
+			column Ano = YEAR([Date])
+				dataType: int64
+				isHidden
+				formatString: 0
+				dataCategory: Years
+				summarizeBy: none
+
+				annotation SummarizationSetBy = User
+
+				annotation TemplateId = Year
+
+			column MonthNo = MONTH([Date])
+				dataType: int64
+				isHidden
+				formatString: 0
+				dataCategory: MonthOfYear
+				summarizeBy: none
+
+				annotation SummarizationSetBy = User
+
+				annotation TemplateId = MonthNumber
+
+			column Mês = FORMAT([Date], "MMMM")
+				dataType: string
+				isHidden
+				dataCategory: Months
+				summarizeBy: none
+				sortByColumn: MonthNo
+
+				annotation SummarizationSetBy = User
+
+				annotation TemplateId = Month
+
+			column QuarterNo = INT(([MonthNo] + 2) / 3)
+				dataType: int64
+				isHidden
+				formatString: 0
+				dataCategory: QuarterOfYear
+				summarizeBy: none
+
+				annotation SummarizationSetBy = User
+
+				annotation TemplateId = QuarterNumber
+
+			column Trimestre = "Qtr " & [QuarterNo]
+				dataType: string
+				isHidden
+				dataCategory: Quarters
+				summarizeBy: none
+				sortByColumn: QuarterNo
+
+				annotation SummarizationSetBy = User
+
+				annotation TemplateId = Quarter
+
+			column Dia = DAY([Date])
+				dataType: int64
+				isHidden
+				formatString: 0
+				dataCategory: DayOfMonth
+				summarizeBy: none
+
+				annotation SummarizationSetBy = User
+
+				annotation TemplateId = Day
+
+			hierarchy 'Hierarquia de datas'
+
+				level Ano
+					column: Ano
+
+				level Trimestre
+					column: Trimestre
+
+				level Mês
+					column: Mês
+
+				level Dia
+					column: Dia
+
+				annotation TemplateId = DateHierarchy
+
+			partition DateTableTemplate_213fe0a7-1d77-4e17-a663-5a524a2ac564 = calculated
+				mode: import
+				source = Calendar(Date(2015,1,1), Date(2015,1,1))
+
+			annotation __PBI_TemplateDateTable = true
+
+			annotation DefaultItem = DateHierarchy
+
+		table LocalDateTable_5d209140-c88f-4f28-a07d-cb296a9b6641
+			isHidden
+			showAsVariationsOnly
+
+			column Date
+				dataType: dateTime
+				isHidden
+				formatString: General Date
+				dataCategory: PaddedDateTableDates
+				summarizeBy: none
+				isNameInferred
+				sourceColumn: [Date]
+
+				annotation SummarizationSetBy = User
+
+			column Ano = YEAR([Date])
+				dataType: int64
+				isHidden
+				formatString: 0
+				dataCategory: Years
+				summarizeBy: none
+
+				annotation SummarizationSetBy = User
+
+				annotation TemplateId = Year
+
+			column MonthNo = MONTH([Date])
+				dataType: int64
+				isHidden
+				formatString: 0
+				dataCategory: MonthOfYear
+				summarizeBy: none
+
+				annotation SummarizationSetBy = User
+
+				annotation TemplateId = MonthNumber
+
+			column Mês = FORMAT([Date], "MMMM")
+				dataType: string
+				isHidden
+				dataCategory: Months
+				summarizeBy: none
+				sortByColumn: MonthNo
+
+				annotation SummarizationSetBy = User
+
+				annotation TemplateId = Month
+
+			column QuarterNo = INT(([MonthNo] + 2) / 3)
+				dataType: int64
+				isHidden
+				formatString: 0
+				dataCategory: QuarterOfYear
+				summarizeBy: none
+
+				annotation SummarizationSetBy = User
+
+				annotation TemplateId = QuarterNumber
+
+			column Trimestre = "Qtr " & [QuarterNo]
+				dataType: string
+				isHidden
+				dataCategory: Quarters
+				summarizeBy: none
+				sortByColumn: QuarterNo
+
+				annotation SummarizationSetBy = User
+
+				annotation TemplateId = Quarter
+
+			column Dia = DAY([Date])
+				dataType: int64
+				isHidden
+				formatString: 0
+				dataCategory: DayOfMonth
+				summarizeBy: none
+
+				annotation SummarizationSetBy = User
+
+				annotation TemplateId = Day
+
+			hierarchy 'Hierarquia de datas'
+
+				level Ano
+					column: Ano
+
+				level Trimestre
+					column: Trimestre
+
+				level Mês
+					column: Mês
+
+				level Dia
+					column: Dia
+
+				annotation TemplateId = DateHierarchy
+
+			partition LocalDateTable_5d209140-c88f-4f28-a07d-cb296a9b6641 = calculated
+				mode: import
+				source = Calendar(Date(Year(MIN('fatoEventos'[DataFinal])), 1, 1), Date(Year(MAX('fatoEventos'[DataFinal])), 12, 31))
+
+			annotation __PBI_LocalDateTable = true
+
+		relationship 579367e1-6710-2883-6af8-c5e024ad23cf
+			fromColumn: fatoEventos.DataInicio
+			toColumn: dimCalendario.Data
+
+		relationship 83962451-2347-429b-8244-eeebf9b70d73
+			joinOnDateBehavior: datePartOnly
+			fromColumn: fatoEventos.DataFinal
+			toColumn: LocalDateTable_5d209140-c88f-4f28-a07d-cb296a9b6641.Date
+
+		cultureInfo pt-BR
+
+		expression _Caminho_Arquivo = "C:\Users\rtoni\OneDrive\Git-Dados\Power_BI\Biblio\eventos.csv" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+			queryGroup: Parâmetros
+
+			annotation PBI_NavigationStepName = Navegação
+
+			annotation PBI_ResultType = Text
+
+		expression _AnoInicio = 2025 meta [IsParameterQuery=true, Type="Number", IsParameterQueryRequired=true]
+			queryGroup: Parâmetros
+
+			annotation PBI_NavigationStepName = Navegação
+
+			annotation PBI_ResultType = Number
+
+		queryGroup Parâmetros
+
+			annotation PBI_QueryGroupOrder = 1
+
+		queryGroup Dimensão
+
+			annotation PBI_QueryGroupOrder = 2
+
+		queryGroup Fato
+
+			annotation PBI_QueryGroupOrder = 3
+
+		queryGroup Funções
+
+			annotation PBI_QueryGroupOrder = 0
+
+		annotation __PBI_TimeIntelligenceEnabled = 1
+
+		annotation PBI_QueryOrder = ["_Caminho_Arquivo","fatoEventos","dimCalendario","_AnoInicio"]
