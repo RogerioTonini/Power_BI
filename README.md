@@ -4,11 +4,30 @@
 
 Biblioteca de scripts da Linguagem M, DAX e scripts TMDL para Power BI.
 
+## Tabela de referencia de caracteres úteis
+
+| Caractere | Hex | Decimal | UNICHAR |
+| --- | --- | --- | --- |
+| ▲ | U+25B2 | 9650 | UNICHAR(9650) |
+| ▼ | U+25BC | 9660 | UNICHAR(9660) |
+| ► | U+25BA | 9658 | UNICHAR(9658) |
+| ↑ | U+2191 | 8593 | UNICHAR(8593) |
+| ↓ | U+2193 | 8595 | UNICHAR(8595) |
+| ⮙ | U+2B99 | 11161 | UNICHAR(11161) |
+| ⮛ | U+2B9B | 11163 | UNICHAR(11163) |
+| ⮚ | U+2B9A | 11162 | UNICHAR(11162) |
+
 ## Repositório para Linguagem M
+
+<https://github.com/RogerioTonini/Power_BI/tree/main/1_Linguagem_M>
 
 ## Repositório para DAX
 
+<https://github.com/RogerioTonini/Power_BI/tree/main/2_DAX>
+
 ## Repositório para TMDL
+
+<https://github.com/RogerioTonini/Power_BI/tree/main/3_TMDL>
 
 ### Commit: Estrutura inicial - Git
 
