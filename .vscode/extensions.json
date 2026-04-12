@@ -44,12 +44,11 @@
         "vscode-icons-team.vscode-icons",   // Ícones de arquivos
         "wayou.vscode-todo-highlight",      // Destaca TODOs
 
-
         // => DADOS E NOTEBOOKS
+        "mechatroner.rainbow-csv", // Colorização de CSV
         // "ms-toolsai.jupyter", // Jupyter Notebooks
         // "ms-toolsai.jupyter-keymap", // Atalhos Jupyter
         // "ms-toolsai.jupyter-renderers", // Visualizações ricas
-        // "mechatroner.rainbow-csv", // Colorização de CSV
         // "charliermarsh.ruff", // Linter super rápido (substitui flake8, pylint)
         // "streetsidesoftware.code-spell-checker", // Verificação ortográfica
         // "streetsidesoftware.code-spell-checker-portuguese-brazilian", // Dicionário PT-BR
