@@ -34,6 +34,7 @@
         "gerhardbrueckl.powerbi-vscode",                // Power BI Studio
         "gerhardbrueckl.powerbi-vscode-extensionpack",  // Power BI VSCode Extension Pack
         "powerquery.vscode-powerquery",                 // Power Query / M Language
+        "analysis-services.tmdl",                       // TDML Extension for VSCode
 
         // => UTILIDADES
         "0xtanzim.filetree-pro",            // FileTree Pro
