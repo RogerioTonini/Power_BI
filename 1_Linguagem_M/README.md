@@ -6,5 +6,7 @@
 | dimUF_Regiao.pq | Tabela de UF e Região | - | <https://github.com/RogerioTonini/Power_BI/blob/main/1_Linguagem_M/dimUF_Regiao.pq> |
 | fxExplodePlanilha.pq | Explode os dados de uma planilha/tabela | _listFiles, _tableName, _typeData | <https://github.com/RogerioTonini/Power_BI/blob/main/1_Linguagem_M/fxExplodePlanilha.pq> |
 | fxListaArquivos.pq | Lista arquivos de uma pasta | _tableName, _listFiles | <https://github.com/RogerioTonini/Power_BI/blob/main/1_Linguagem_M/fxListaArquivos.pq> |
+| fxRenomearColMesAno.pq | Renomeia colunas de mês/ano | _tabela | <https://github.com/RogerioTonini/Power_BI/blob/main/1_Linguagem_M/fxRenomearColMesAno.pq> |
+| fxUnpivotTable.pq | Unpivot genérico de tabela | _tabela, _colunasFixas, _nomesUnpivot | <https://github.com/RogerioTonini/Power_BI/blob/main/1_Linguagem_M/fxUnpivotTable.pq> |
 
 ## Links uteis
