@@ -24,7 +24,7 @@ let
                         "Parâmetro inválido",
                         "_nomesUnpivot deve conter 2 elementos: {nomeAtributo, nomeValor}",
                         "_nomesUnpivot"
-                     ),
+                    ),
 
             // Unpivot: mantém _colunasFixas como chave e empilha o restante em linhas
             Resultado =
