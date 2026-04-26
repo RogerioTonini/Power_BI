@@ -1,0 +1,59 @@
+// Ordem de criação das medidas
+
+// Tot_Chamados
+//      ↓
+// Tot_YoY_Chamados
+//      ↓
+// %_YoY_Chamados
+//      ↓
+// &_%_YoY_Chamados
+
+// Medida para calcular o total de chamados
+
+Tot_Chamados =
+    COUNTROWS(fatoChamados)
+
+// Medida para calcular o total de chamados YoY
+
+Tot_YoY_Chamados =
+    CALCULATE(
+        [Tot_Chamados],
+        SAMEPERIODLASTYEAR(dimCalendario[Data])
+    )
+
+// Medida para calcular o percentual de variação YoY
+
+%_YoY_Chamados =
+    DIVIDE(
+        [Tot_Chamados] - [Tot_YoY_Chamados],
+        [Tot_YoY_Chamados],
+        0
+    )
+
+// Medida para criar o formato: 9.99% ⮙ ⮛ ►
+
+&_%_YoY_Chamados =
+
+VAR _Percentual =
+    [%_YoY_Chamados]
+
+VAR _Seta =
+    IF(
+        _Percentual > 0,  "⮙",
+        IF(
+            _Percentual < 0, "⮛",
+            "►"
+        )
+    )
+
+VAR _Texto =
+    FORMAT( ABS( _Percentual ), "0.0%" )
+
+RETURN
+    IF(
+        ISBLANK( [Tot_YoY_Chamados] ),
+        0,
+        _Texto & " " & _Seta
+    )
+
+

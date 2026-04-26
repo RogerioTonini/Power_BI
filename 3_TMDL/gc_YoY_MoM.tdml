@@ -1,0 +1,54 @@
+createOrReplace
+
+	table gc_YoY_MoM
+
+		calculationGroup
+			precedence: 1
+
+			calculationItem %MoM = ```
+
+					VAR vTot_MoM =
+					    CALCULATE(
+					        SELECTEDMEASURE(),
+					        DATEADD( dimCalendario[Data], -1, MONTH )
+					    )
+
+					VAR vPerc =
+					    DIVIDE(
+					        SELECTEDMEASURE() - vTot_MoM,
+					        vTot_MoM,
+					        0
+					    )
+
+					RETURN vPerc
+					```
+
+				formatStringDefinition = "#,##0.0% ⮙; #,##0.0% ⮛; 0 ⮚"
+
+			calculationItem %YoY = ```
+
+					VAR vTot_YoY =
+					    CALCULATE(
+					        SELECTEDMEASURE(),
+					        SAMEPERIODLASTYEAR(dimCalendario[Data])
+					    )
+
+					VAR vPerc =
+					    DIVIDE( SELECTEDMEASURE() - vTot_YoY, vTot_YoY, 0 )
+
+					RETURN
+					    vPerc
+					```
+
+				formatStringDefinition = "#,##0.0% ⮙; #,##0.0% ⮛; 0 ⮚"
+
+		column coluna_YoY_MoM
+			dataType: string
+			sourceColumn: Name
+			sortByColumn: Ordinal
+
+		column Ordinal
+			dataType: int64
+			formatString: 0
+			summarizeBy: none
+			sourceColumn: Ordinal

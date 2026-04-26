@@ -1,0 +1,57 @@
+createOrReplace
+
+	table 'Inteligencia Temporal'
+
+		calculationGroup
+			precedence: 2
+
+			calculationItem Current = SELECTEDMEASURE()
+
+			calculationItem AnoAnterior =
+					CALCULATE (
+						SELECTEDMEASURE (),
+						SAMEPERIODLASTYEAR ( 'dimCalendario'[Data] )
+					)
+
+			calculationItem YoY =
+					VAR _Atual = SELECTEDMEASURE ()
+									VAR _LY =
+										CALCULATE (
+											SELECTEDMEASURE (),
+											SAMEPERIODLASTYEAR ( 'dimCalendario'[Data] )
+										)
+									VAR _Dif = _Atual - _LY
+
+									RETURN
+										DIVIDE ( _DIF , _LY )
+
+				formatStringDefinition = "0.0%;-0.0%"
+
+			calculationItem YTD =
+					CALCULATE (
+						SELECTEDMEASURE (),
+						DATESYTD ( 'dimCalendario'[Data] )
+					)
+
+			calculationItem QTD =
+					CALCULATE (
+						SELECTEDMEASURE (),
+						DATESQTD ( 'dimCalendario'[Data] )
+					)
+
+			calculationItem MTD =
+					CALCULATE (
+						SELECTEDMEASURE (),
+						DATESMTD ( 'dimCalendario'[Data] )
+					)
+
+		column 'Exibir Como'
+			dataType: string
+			sourceColumn: Name
+			sortByColumn: Ordinal
+
+		column Ordinal
+			dataType: int64
+			formatString: 0
+			summarizeBy: none
+			sourceColumn: Ordinal
