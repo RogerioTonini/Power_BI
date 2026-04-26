@@ -24,13 +24,11 @@ GitHub dimHoras: https://github.com/alisonpezzott/calendar
 Vídeo.: Linguagem TMDL Avançada - <https://www.youtube.com/watch?v=QyYx0Td6Q3I>
 ```
 
-## Grupo de cálculos - Créditos
+## Grupo de cálculos: Inteligência Temporal - Créditos
 
 ```text
-EdTech.: XPERIUN
-Trilha.: Linguagem DAX Avançada
-Módulo.: Aulas Avançadas Extras - Aula: 5 - USO DE GRUPOS DE CÁLCULO NO POWER BI COMO NINGUÉM TE MOSTROU ANTES
-Vídeo..: USO DE GRUPOS DE CÁLCULO NO POWER BI COMO NINGUÉM TE MOSTROU ANTES! - <https://www.youtube.com/watch?v=urgO-3eDJvo&t=13s>
+Autor.: Karine Lago
+Vídeo.: Novidade: Medidas Dinâmicas com Grupos de Cálculos no Power BI -https://www.youtube.com/watch?v=0yQZmZYmhqs&t=921s
 ```
 
 ## Links uteis
