@@ -2,9 +2,11 @@
 
 | Arquivo | Objetivo | URL |
 | --- | --- | --- |
-| _Medidas.tmdl | Cria tabela de medidas | <https://github.com/RogerioTonini/Power_BI/blob/main/3_TMDL/_Medidas.tdml> |
-| dimCalendario.tmdl | Tabela Calendário | <https://github.com/RogerioTonini/Power_BI/blob/main/3_TMDL/dimCalendario.tmdl> |
-| dimHoras.tmdl | Tabela Horas do dia | <https://github.com/RogerioTonini/Power_BI/blob/main/3_TMDL/dimHoras.tmdl> |
+| _tableMedidas.tmdl | Cria tabela de medidas | <https://github.com/RogerioTonini/Power_BI/blob/main/3_TMDL/_tableMedidas.tdml> |
+| dimCalendario.tmdl | Tabela Calendário | <https://github.com/RogerioTonini/Power_BI/blob/main/3_TMDL/dimCalendario.tdml> |
+| dimHoras.tmdl | Tabela Horas do dia | <https://github.com/RogerioTonini/Power_BI/blob/main/3_TMDL/dimHoras.tdml> |
+| gc_YoY_MoM.tdml | Cria grupo de cálculos de inteligência temporal (YoY e MoM) | <https://github.com/RogerioTonini/Power_BI/blob/main/3_TMDL/gc_YoY_MoM.tdml> |
+| Inteligencia_Temporal.tdml | Cria grupo de cálculos de inteligência temporal (AnoAnterior,YoY, QTD, MTD, e MoM) | <https://github.com/RogerioTonini/Power_BI/blob/main/3_TMDL/Inteligencia_Temporal.tdml> |
 
 ## Dicas
 
