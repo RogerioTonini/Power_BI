@@ -1,0 +1,15 @@
+VAR _Valor =
+    ABS( SELECTEDMEASURE() )
+
+VAR _Formato =
+    SWITCH(
+        TRUE(),
+        _Valor >= POWER( 10, 12 ), "#,#0,,,,.000 T",
+        _Valor >= POWER( 10, 9 ),  "#,#0,,,.000 B",
+        _Valor >= POWER( 10, 6 ),  "#,#0,.000 M",
+        _Valor >= POWER( 10, 3 ),  "#,#0,.00 K",
+        "#,##0"
+    )
+
+RETURN
+    """" & FORMAT( _Valor, _Formato ) & """"
